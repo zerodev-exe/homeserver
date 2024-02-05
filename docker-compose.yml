@@ -72,9 +72,9 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./jellyconfig:/config
-      - /home/zero/TVShows:/data/tvshows
-      - /home/zero/Movies:/data/movies
-      - /home/zero/Anime:/data/anime
+      - /media/devmon/T7/Media/TVShows:/data/tvshows
+      - /media/devmon/T7/Media/Movies:/data/movies
+      - /media/devmon/T7/Media/Anime:/data/anime
     ports:
       - 8096:8096
     restart: unless-stopped
