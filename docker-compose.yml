@@ -12,24 +12,21 @@ services:
       - '7575:7575'
 
 
-  deluge:
-    image: lscr.io/linuxserver/deluge:latest
-    container_name: deluge
+  qbittorrent:
+    container_name: qbittorrent
+    image: ghcr.io/hotio/qbittorrent:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
     environment:
       - PUID=1000
       - PGID=1000
+      - UMASK=002
       - TZ=Etc/UTC
-      - DELUGE_LOGLEVEL=error #optional
+      - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
-      - /delugeconfig:/config
-      - /home/zero/TVShows:/downloads
-    ports:
-      - 8112:8112
-      - 6881:6881
-      - 6881:6881/udp
-      - 58846:58846 #optional
-    restart: unless-stopped
-
+      - ./qbitconfig:/config
+      - /media/zero/T7/Media:/data
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -40,8 +37,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./sonarrconfig:/config
-      - ./tvseries:/tv #optional
-      - /home/zero/TVShows:/downloads #optional
+      - /media/zero/T7/Media/tv:/tv #optional
+      - /media/zero/T7/Media/tv:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -56,8 +53,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./radarrconfig:/config
-      - ./movies:/movies #optional
-      - /home/zero/Movies:/downloads #optional
+      - /media/zero/T7/Media/movies:/movies #optional
+      - /media/zero/T7/Media/movies:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -72,9 +69,9 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./jellyconfig:/config
-      - /media/devmon/T7/Media/TVShows:/data/tvshows
-      - /media/devmon/T7/Media/Movies:/data/movies
-      - /media/devmon/T7/Media/Anime:/data/anime
+      - /media/zero/T7/Media/tv:/data/tvshows
+      - /media/zero/T7/Media/movies:/data/movies
+      - /media/zero/T7/Media/anime:/data/anime
     ports:
       - 8096:8096
     restart: unless-stopped
