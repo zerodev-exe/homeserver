@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   homarr:
     container_name: homarr
@@ -5,9 +7,9 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ./homarr/configs:/app/data/configs
-      - ./homarr/icons:/app/public/icons
-      - ./homarr/data:/data
+      - /media/zero/T7/configs/homarr/configs:/app/data/configs
+      - /media/zero/T7/configs/homarr/icons:/app/public/icons
+      - /media/zero/T7/configs/homarr/data:/data
     ports:
       - '7575:7575'
 
@@ -25,8 +27,27 @@ services:
       - TZ=Etc/UTC
       - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
-      - ./qbitconfig:/config
-      - /media/zero/T7/Media:/data
+      - /media/zero/T7/configs/qbitconfig:/config
+      - /media/zero/T7/Media/movies:/data
+
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: deluge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - /media/zero/T7/configs/delugeconfig:/config
+      - /media/zero/T7/Media/tv:/downloads
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+      - 58846:58846 #optional
+    restart: unless-stopped
+
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -36,9 +57,10 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./sonarrconfig:/config
+      - /media/zero/T7/configs/sonarrconfig:/config
+      - /media/zero/T7/Media/downloads:/downloads #optional
       - /media/zero/T7/Media/tv:/tv #optional
-      - /media/zero/T7/Media/tv:/downloads #optional
+      - /media/zero/T7/Media/anime:/anime #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -52,9 +74,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./radarrconfig:/config
+      - /media/zero/T7/configs/radarrconfig:/config
       - /media/zero/T7/Media/movies:/movies #optional
-      - /media/zero/T7/Media/movies:/downloads #optional
+      - /media/zero/T7/Media/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -68,7 +90,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./jellyconfig:/config
+      - /media/zero/T7/configs/jellyconfig:/config
       - /media/zero/T7/Media/tv:/data/tvshows
       - /media/zero/T7/Media/movies:/data/movies
       - /media/zero/T7/Media/anime:/data/anime
@@ -85,7 +107,21 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./prowlarrconfig:/config
+      - /media/zero/T7/configs/prowlarrconfig:/config
     ports:
       - 9696:9696
     restart: unless-stopped
+
+
+  jellyseerr:
+    container_name: jellyseerr
+    image: ghcr.io/hotio/jellyseerr
+    ports:
+      - "5055:5055"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Etc/UTC
+    volumes:
+      - /media/zero/T7/configs/jellyseerrconfig:/config
