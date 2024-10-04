@@ -26,7 +26,7 @@ services:
       - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
       - ./configs/qbitconfig:/config
-      - /media/devmon/PortableSSD/Media/movies:/data
+      - /media/devmon/PortableSSD/Media/downloads:/downloads
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
