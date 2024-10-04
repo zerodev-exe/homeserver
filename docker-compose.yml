@@ -5,9 +5,9 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - /media/devmon/PortableSSD/configs/homarr/configs:/app/data/configs
-      - /media/devmon/PortableSSD/configs/homarr/icons:/app/public/icons
-      - /media/devmon/PortableSSD/configs/homarr/data:/data
+      - ./configs/homarr/configs:/app/data/configs
+      - ./configs/homarr/icons:/app/public/icons
+      - ./configs/homarr/data:/data
     ports:
       - '80:7575'
 
@@ -25,7 +25,7 @@ services:
       - TZ=Etc/UTC
       - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
-      - /media/devmon/PortableSSD/configs/qbitconfig:/config
+      - ./configs/qbitconfig:/config
       - /media/devmon/PortableSSD/Media/movies:/data
 
   sonarr:
@@ -36,7 +36,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/devmon/PortableSSD/configs/sonarrconfig:/config
+      - ./configs/sonarrconfig:/config
       - /media/devmon/PortableSSD/Media/downloads:/downloads #optional
       - /media/devmon/PortableSSD/Media/tv:/tv #optional
       - /media/devmon/PortableSSD/Media/anime:/anime #optional
@@ -53,7 +53,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/devmon/PortableSSD/configs/radarrconfig:/config
+      - ./configs/radarrconfig:/config
       - /media/devmon/PortableSSD/Media/movies:/movies #optional
       - /media/devmon/PortableSSD/Media/downloads:/downloads #optional
     ports:
@@ -69,7 +69,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/devmon/PortableSSD/configs/jellyconfig:/config
+      - ./configs/jellyconfig:/config
       - /media/devmon/PortableSSD/Media/tv:/data/tvshows
       - /media/devmon/PortableSSD/Media/movies:/data/movies
       - /media/devmon/PortableSSD/Media/anime:/data/anime
@@ -86,7 +86,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /media/devmon/PortableSSD/configs/prowlarrconfig:/config
+      - ./configs/prowlarrconfig:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -103,7 +103,7 @@ services:
       - UMASK=002
       - TZ=Etc/UTC
     volumes:
-      - /media/devmon/PortableSSD/configs/jellyseerrconfig:/config
+      - ./configs/jellyseerrconfig:/config
 # The end of the Media server part
 
 # Network-wide AdBlock
