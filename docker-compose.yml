@@ -9,7 +9,7 @@ services:
       - /media/devmon/PortableSSD/configs/homarr/icons:/app/public/icons
       - /media/devmon/PortableSSD/configs/homarr/data:/data
     ports:
-      - '7575:7575'
+      - '80:7575'
 
 # This is the Media server part
   qbittorrent:
@@ -115,7 +115,7 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "80:80/tcp"
+      - "8800:80/tcp"
     environment:
       TZ: 'America/Chicago'
       # WEBPASSWORD: 'set a secure password here or it will be random'
