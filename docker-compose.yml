@@ -26,7 +26,7 @@ services:
       - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
       - ./configs/qbitconfig:/config
-      - /media/devmon/PortableSSD/Media/downloads:/downloads
+      - /media/casaos/PortableSSD/Media/downloads:/downloads
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -37,9 +37,9 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./configs/sonarrconfig:/config
-      - /media/devmon/PortableSSD/Media/downloads:/downloads #optional
-      - /media/devmon/PortableSSD/Media/tv:/tv #optional
-      - /media/devmon/PortableSSD/Media/anime:/anime #optional
+      - /media/casaos/PortableSSD/Media/downloads:/downloads #optional
+      - /media/casaos/PortableSSD/Media/tv:/tv #optional
+      - /media/casaos/PortableSSD/Media/anime:/anime #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -54,8 +54,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./configs/radarrconfig:/config
-      - /media/devmon/PortableSSD/Media/movies:/movies #optional
-      - /media/devmon/PortableSSD/Media/downloads:/downloads #optional
+      - /media/casaos/PortableSSD/Media/movies:/movies #optional
+      - /media/casaos/PortableSSD/Media/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -70,9 +70,9 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./configs/jellyconfig:/config
-      - /media/devmon/PortableSSD/Media/tv:/data/tvshows
-      - /media/devmon/PortableSSD/Media/movies:/data/movies
-      - /media/devmon/PortableSSD/Media/anime:/data/anime
+      - /media/casaos/PortableSSD/Media/tv:/data/tvshows
+      - /media/casaos/PortableSSD/Media/movies:/data/movies
+      - /media/casaos/PortableSSD/Media/anime:/data/anime
     ports:
       - 8096:8096
     restart: unless-stopped
