@@ -26,7 +26,7 @@ services:
       - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
       - ./configs/qbitconfig:/config
-      - /media/casaos/PortableSSD/Media/downloads:/downloads
+      - /media/casaos/PortableSSD/Media/downloads:/app/qBittorrent/downloads
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -37,7 +37,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./configs/sonarrconfig:/config
-      - /media/casaos/PortableSSD/Media/downloads:/downloads #optional
+      - /media/casaos/PortableSSD/Media/downloads:/app/qBittorrent/downloads #optional
       - /media/casaos/PortableSSD/Media/tv:/tv #optional
       - /media/casaos/PortableSSD/Media/anime:/anime #optional
     ports:
@@ -55,7 +55,7 @@ services:
     volumes:
       - ./configs/radarrconfig:/config
       - /media/casaos/PortableSSD/Media/movies:/movies #optional
-      - /media/casaos/PortableSSD/Media/downloads:/downloads #optional
+      - /media/casaos/PortableSSD/Media/downloads:/app/qBittorrent/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
