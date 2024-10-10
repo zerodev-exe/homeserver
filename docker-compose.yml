@@ -37,7 +37,7 @@ services:
       - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
       - ./configs/qbitconfig:/config
-      - /mnt/storageMedia/downloads:/app/qBittorrent/downloads
+      - /mnt/storage/Media/downloads:/app/qBittorrent/downloads
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -48,9 +48,9 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./configs/sonarrconfig:/config
-      - /mnt/storageMedia/downloads:/app/qBittorrent/downloads #optional
-      - /mnt/storageMedia/tv:/tv #optional
-      - /mnt/storageMedia/anime:/anime #optional
+      - /mnt/storage/Media/downloads:/app/qBittorrent/downloads #optional
+      - /mnt/storage/Media/tv:/tv #optional
+      - /mnt/storage/Media/anime:/anime #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -65,8 +65,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./configs/radarrconfig:/config
-      - /mnt/storageMedia/movies:/movies #optional
-      - /mnt/storageMedia/downloads:/app/qBittorrent/downloads #optional
+      - /mnt/storage/Media/movies:/movies #optional
+      - /mnt/storage/Media/downloads:/app/qBittorrent/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -81,9 +81,9 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./configs/jellyconfig:/config
-      - /mnt/storageMedia/tv:/data/tvshows
-      - /mnt/storageMedia/movies:/data/movies
-      - /mnt/storageMedia/anime:/data/anime
+      - /mnt/storage/Media/tv:/data/tvshows
+      - /mnt/storage/Media/movies:/data/movies
+      - /mnt/storage/Media/anime:/data/anime
     ports:
       - 8096:8096
     restart: unless-stopped
