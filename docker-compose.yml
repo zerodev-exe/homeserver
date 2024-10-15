@@ -100,9 +100,10 @@ services:
       - VERSION=docker
       - PLEX_CLAIM= #optional
     volumes:
-      - /path/to/plex/library:/config
-      - /path/to/tvseries:/tv
-      - /path/to/movies:/movies
+      - ./configs/plexconfig:/config
+      - /mnt/storage/Media/tv:/data/tvshows
+      - /mnt/storage/Media/movies:/data/movies
+      - /mnt/storage/Media/anime:/data/anime
     restart: unless-stopped
 
   prowlarr:
