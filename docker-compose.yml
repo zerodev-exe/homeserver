@@ -84,6 +84,7 @@ services:
       - /mnt/storage/Media/tv:/data/tvshows
       - /mnt/storage/Media/movies:/data/movies
       - /mnt/storage/Media/anime:/data/anime
+      - /dev/dri:/dev/dri # For handware transcoding
     ports:
       - 8096:8096
     restart: unless-stopped
