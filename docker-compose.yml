@@ -1,7 +1,7 @@
 services:
   homeassistant:
     container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: "ghcr.io/home-assistant/home-assistant:latest"
     volumes:
       - /PATH_TO_YOUR_CONFIG:/config
       - /etc/localtime:/etc/localtime:ro
@@ -75,9 +75,6 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
-    user: 1000:1000
-    group_add:
-      - "107" # Get the number that this command gives you ```getent group render | cut -d: -f3```
     environment:
       - PUID=1000
       - PGID=1000
