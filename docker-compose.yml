@@ -134,7 +134,6 @@ services:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
     environment:
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
       - TZ=Europe/London
     ports:
       - 8191:8191
