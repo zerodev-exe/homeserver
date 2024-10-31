@@ -16,11 +16,11 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ./configs/homarr/configs:/app/data/configs
-      - ./configs/homarr/icons:/app/public/icons
-      - ./configs/homarr/data:/data
+      - /home/casaos/homeserver/configs/homarr/configs:/app/data/configs
+      - /home/casaos/homeserver/configs/homarr/icons:/app/public/icons
+      - /home/casaos/homeserver/configs/homarr/data:/data
     ports:
-      - '80:7575'
+      - '7575:7575'
 
 # This is the Media server part
   qbittorrent:
@@ -36,8 +36,8 @@ services:
       - TZ=Etc/UTC
       - WEBUI_PORTS=8080/tcp,8080/udp
     volumes:
-      - ./configs/qbitconfig:/config
-      - /mnt/storage/Media/downloads:/app/qBittorrent/downloads
+      - /home/casaos/homeserver/configs/qbitconfig:/config
+      - /mnt/disks/Media/downloads:/app/qBittorrent/downloads
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -47,10 +47,10 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./configs/sonarrconfig:/config
-      - /mnt/storage/Media/downloads:/app/qBittorrent/downloads #optional
-      - /mnt/storage/Media/tv:/tv #optional
-      - /mnt/storage/Media/anime:/anime #optional
+      - /home/casaos/homeserver/configs/sonarrconfig:/config
+      - /mnt/disks/Media/downloads:/app/qBittorrent/downloads #optional
+      - /mnt/disks/Media/tv:/tv #optional
+      - /mnt/disks/Media/anime:/anime #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -64,9 +64,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./configs/radarrconfig:/config
-      - /mnt/storage/Media/movies:/movies #optional
-      - /mnt/storage/Media/downloads:/app/qBittorrent/downloads #optional
+      - /home/casaos/homeserver/configs/radarrconfig:/config
+      - /mnt/disks/Media/movies:/movies #optional
+      - /mnt/disks/Media/downloads:/app/qBittorrent/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -80,10 +80,10 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/storage/configs/jellyconfig:/config
-      - /mnt/storage/Media/tv:/data/tvshows
-      - /mnt/storage/Media/movies:/data/movies
-      - /mnt/storage/Media/anime:/data/anime
+      - /mnt/disks/configs/jellyconfig:/config
+      - /mnt/disks/Media/tv:/data/tvshows
+      - /mnt/disks/Media/movies:/data/movies
+      - /mnt/disks/Media/anime:/data/anime
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
     ports:
@@ -99,7 +99,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./configs/prowlarrconfig:/config
+      - /home/casaos/homeserver/configs/prowlarrconfig:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -127,7 +127,7 @@ services:
       - UMASK=002
       - TZ=Etc/UTC
     volumes:
-      - ./configs/jellyseerrconfig:/config
+      - /home/casaos/homeserver/configs/jellyseerrconfig:/config
 # The end of the Media server part
 
 # Network-wide AdBlock
@@ -147,8 +147,8 @@ services:
 
     # Volumes store your data between container upgrades
     volumes:
-      - './configs/pi-hole/etc-pihole:/etc/pihole'
-      - './configs/pi-hole/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '/home/casaos/homeserver/configs/pi-hole/etc-pihole:/etc/pihole'
+      - '/home/casaos/homeserver/configs/pi-hole/etc-dnsmasq.d:/etc/dnsmasq.d'
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
