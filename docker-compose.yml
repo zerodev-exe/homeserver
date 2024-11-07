@@ -104,7 +104,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/storage/configs/jellyconfig:/config
+      - /home/casaos/homeserver/configs/jellyconfig:/config
       - /mnt/storage/Media/tv:/data/tvshows
       - /mnt/storage/Media/movies:/data/movies
       - /mnt/storage/Media/anime:/data/anime
