@@ -107,7 +107,7 @@ services:
       - PGID=1000
     volumes:
       - ${MEDIA_DIRECTORY}/tvshows:/tv
-      - ${MEDIA_DIRECTORY}/anime:/data/anime
+      - ${MEDIA_DIRECTORY}/anime:/anime
       - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
       - ${INSTALL_DIRECTORY}/config/sonarr:/config
     ports:
