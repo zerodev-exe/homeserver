@@ -71,6 +71,7 @@ services:
     volumes:
       - ${MEDIA_DIRECTORY}/movies:/data/movies
       - ${MEDIA_DIRECTORY}/tv:/data/tvshows
+      - ${MEDIA_DIRECTORY}/anime:/data/anime
       - ${INSTALL_DIRECTORY}/config/jellyconfig:/config
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
