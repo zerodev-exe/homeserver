@@ -49,8 +49,8 @@ services:
     volumes:
       - /home/casaos/homeserver/configs/sonarrconfig:/config
       - /mnt/storage/Media/downloads:/app/qBittorrent/downloads #optional
-      - /mnt/storage/Media/tv:/tv #optional
-      - /mnt/storage/Media/anime:/anime #optional
+      - /mnt/storage/Media/tv:/media/tv #optional
+      - /mnt/storage/Media/anime:/media/anime #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -64,7 +64,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /home/casaos/homeserver/configs/radarrconfig:/config
-      - /mnt/storage/Media/movies:/movies #optional
+      - /mnt/storage/Media/movies:/media/movies #optional
       - /mnt/storage/Media/downloads:/app/qBittorrent/downloads #optional
     ports:
       - 7878:7878
