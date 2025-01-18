@@ -106,8 +106,8 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ${MEDIA_DIRECTORY}/tvshows:/tv
-      - ${MEDIA_DIRECTORY}/anime:/anime
+      - ${MEDIA_DIRECTORY}/tvshows:/data/tv
+      - ${MEDIA_DIRECTORY}/anime:/data/anime
       - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
       - ${INSTALL_DIRECTORY}/config/sonarr:/config
     ports:
@@ -125,7 +125,7 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ${MEDIA_DIRECTORY}/movies:/movies
+      - ${MEDIA_DIRECTORY}/movies:/data/movies
       - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
       - ${INSTALL_DIRECTORY}/config/radarr:/config
     ports:
@@ -179,8 +179,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ${MEDIA_DIRECTORY}/movies:/movies
-      - ${MEDIA_DIRECTORY}/tvshows:/tv
+      - ${MEDIA_DIRECTORY}/movies:/data/movies
+      - ${MEDIA_DIRECTORY}/tvshows:/data/tv
+      - ${MEDIA_DIRECTORY}/anime:/data/anime
       - ${INSTALL_DIRECTORY}/config/bazarr:/config
     ports:
       - 6767:6767
