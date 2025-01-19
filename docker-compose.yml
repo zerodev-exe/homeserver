@@ -21,7 +21,7 @@ services:
       - 8191:8191
     restart: unless-stopped
 
-# Network-wide AdBlock
+  # Network-wide AdBlock
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
@@ -90,7 +90,7 @@ services:
       - PGID=1000
       - WEBUI_PORT=8080
     volumes:
-      - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
+      - ${MEDIA_DIRECTORY}/downloads:/downloads
       - ${INSTALL_DIRECTORY}/config/qbittorrent:/config
     restart: unless-stopped
     ####ports: # qbittorrent
@@ -108,7 +108,7 @@ services:
     volumes:
       - ${MEDIA_DIRECTORY}/tv:/data/tv
       - ${MEDIA_DIRECTORY}/anime:/data/anime
-      - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
+      - ${MEDIA_DIRECTORY}/downloads:/downloads
       - ${INSTALL_DIRECTORY}/config/sonarr:/config
     ports:
       - 8989:8989
@@ -126,46 +126,10 @@ services:
       - PGID=1000
     volumes:
       - ${MEDIA_DIRECTORY}/movies:/data/movies
-      - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
+      - ${MEDIA_DIRECTORY}/downloads:/downloads
       - ${INSTALL_DIRECTORY}/config/radarr:/config
     ports:
       - 7878:7878
-    restart: unless-stopped
-    security_opt:
-      - apparmor=unconfined
-
-  # Lidarr is used to query, add downloads to the download queue and index Music
-  # https://lidarr.audio/
-  lidarr:
-    image: lscr.io/linuxserver/lidarr
-    container_name: lidarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - ${MEDIA_DIRECTORY}/music:/music
-      - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
-      - ${INSTALL_DIRECTORY}/config/lidarr:/config
-    ports:
-      - 8686:8686
-    restart: unless-stopped
-    security_opt:
-      - apparmor=unconfined
-
-  # Readarr is used to query, add downloads to the download queue and index Audio and Ebooks
-  # https://readarr.com/
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - ${MEDIA_DIRECTORY}/books:/books
-      - ${MEDIA_DIRECTORY}/downloads:/app/qBittorrent/downloads
-      - ${INSTALL_DIRECTORY}/config/readarr:/config
-    ports:
-      - 8787:8787
     restart: unless-stopped
     security_opt:
       - apparmor=unconfined
