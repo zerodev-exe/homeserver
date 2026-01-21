@@ -1,4 +1,5 @@
 services:
+
   homarr:
     container_name: homarr
     image: ghcr.io/ajnart/homarr:latest
@@ -63,7 +64,7 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/${MEDIA_SERVICE}
     container_name: ${MEDIA_SERVICE}
-    #network_mode: host # plex
+    network_mode: host # plex
     environment:
       - PUID=1000
       - PGID=1000
@@ -75,15 +76,15 @@ services:
       - ${INSTALL_DIRECTORY}/config/jellyconfig:/config
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
-    ports: # plex
-      - 8096:8096 # plex
+    #ports: # plex
+      #- 8096:8096 # plex
     restart: unless-stopped
     security_opt:
       - apparmor=unconfined
 
   # qBitorrent is used to download torrents
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:4.6.0
+    image: lscr.io/linuxserver/qbittorrent
     container_name: qbittorrent
     environment:
       - PUID=1000
