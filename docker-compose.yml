@@ -22,18 +22,27 @@ services:
       - 8191:8191
     restart: unless-stopped
 
-  jellyseerr:
-    container_name: jellyseerr
-    image: ghcr.io/hotio/jellyseerr
-    ports:
-      - "5055:5055"
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: seerr
     environment:
+      - LOG_LEVEL=debug
+      - PORT=5055 #optional
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Etc/UTC
+    ports:
+      - 5055:5055
     volumes:
-      - ${INSTALL_DIRECTORY}/config/jellyseerrconfig:/config
+      - ${INSTALL_DIRECTORY}/config/seerrconfig:/app/config
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
     restart: unless-stopped
 
   # jellyfin is used to serve your media to the client devices
